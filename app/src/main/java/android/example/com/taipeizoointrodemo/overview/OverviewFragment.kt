@@ -1,6 +1,7 @@
 package android.example.com.taipeizoointrodemo.overview
 
 import android.example.com.taipeizoointrodemo.databinding.FragmentOverviewBinding
+import android.hardware.Camera
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,8 @@ class OverviewFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
+
+        binding.areaList.adapter = AreaListAdapter()
 
         setHasOptionsMenu(true)
         return binding.root

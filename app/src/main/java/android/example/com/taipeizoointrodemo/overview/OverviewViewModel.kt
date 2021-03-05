@@ -1,5 +1,6 @@
 package android.example.com.taipeizoointrodemo.overview
 
+import android.example.com.taipeizoointrodemo.networkApi.EachAreaResults
 import android.example.com.taipeizoointrodemo.networkApi.TaipeiZooAreaApi
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -15,11 +16,19 @@ class OverviewViewModel : ViewModel() {
     private val TAG = OverviewViewModel::class.java.simpleName
 
     // The internal MutableLiveData String that stores the status of the most recent request
-    private val _response = MutableLiveData<String>()
+    private val _status = MutableLiveData<String>()
 
     // The external immutable LiveData for the request status String
-    val response: LiveData<String>
-        get() = _response
+    val status: LiveData<String>
+        get() = _status
+
+    // Internally, we use a MutableLiveData, because we will be updating the MarsProperty with new values
+    private val _area = MutableLiveData<List<EachAreaResults>>()
+
+    // The external LiveData interface to the property is immutable, so only this class can modify
+    val area: LiveData<List<EachAreaResults>>
+        get() = _area
+
 
     // 因為使用Coroutine, 所以要建立Job
     private var viewModelJob = Job()
@@ -46,10 +55,15 @@ class OverviewViewModel : ViewModel() {
                 // 等到收到request才繼續執行，await是non-blocking, 目前執行在main thread也OK
                 // Await the completion of our Retrofit request
                 var listResult = getTaipeiZooAreaDeferred.await()
-                _response.value = "Success: ${listResult.result.count} Mars properties retrieved"
+                _status.value = "Success: ${listResult.result.count} Mars properties retrieved"
                 Log.d(TAG, "Success: ${listResult.result.count} Mars properties retrieved")
+
+                // 將第一筆result放入property
+                if (listResult.result.count > 0) {
+                    _area.value = listResult.result.results
+                }
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                _status.value = "Failure: ${e.message}"
             }
         }
     }
