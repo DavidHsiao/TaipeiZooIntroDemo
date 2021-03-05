@@ -53,6 +53,7 @@ dependencies {
     // Add Dependencies for Moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi" // provide kotlin specific support for moshi
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$version_moshi"
 
 
     // Retrofit related

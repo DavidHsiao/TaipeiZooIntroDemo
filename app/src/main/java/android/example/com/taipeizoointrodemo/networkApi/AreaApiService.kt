@@ -6,11 +6,9 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-//private const val BASE_URL = "https://data.taipei/api/v1/dataset/"
-//private const val BASE_URL = "https://pokeapi.co/api/v2/"
-//private const val BASE_URL = "https://devbytes.udacity.com/"
-private const val BASE_URL = "https://mars.udacity.com/"
+private const val BASE_URL = "https://data.taipei/api/v1/dataset/"
 
 
 // 用Moshi builder建立moshi object
@@ -33,26 +31,9 @@ private val retrofit = Retrofit.Builder()
 interface TaipeiZooAreaApiService {
     // 定義我們希望這個method使用的end point or path
     // The end point for the JSON response is realestate
-//    @GET("5a0e5fbb-72f8-41c6-908e-2fb25eff9b8a")
-//    fun getProperties(@Query("scope") type: String):
-//            Call<GetResult>
-
-//            Call<String> // Call Object is used to start the request
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    @GET("pokemon")
-//    fun fetchPirateList(
-//        @Query("limit") limit: Int = 10,
-//        @Query("offset") offset: Int = 0
-//    ): Call<PirateResponse>
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @GET("realestate")
-    fun getProperties():
-    // Call的裡面是要求retrofit回傳的資料類型
-            Call<List<MarsProperty>>
-
-
+    @GET("5a0e5fbb-72f8-41c6-908e-2fb25eff9b8a")
+    fun getProperties(@Query("scope") type: String):
+            Call<GetResult>
 }
 
 // Create the MarsApi object using Retrofit to implement the MarsApiService
