@@ -1,6 +1,7 @@
 package android.example.com.taipeizoointrodemo.overview
 
-import android.example.com.taipeizoointrodemo.networkApi.TaipeiZooAeraApi
+import android.example.com.taipeizoointrodemo.networkApi.MarsProperty
+import android.example.com.taipeizoointrodemo.networkApi.TaipeiZooAreaApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,17 +32,44 @@ class OverviewViewModel : ViewModel() {
 
         // Call the MarsApi to enqueue the Retrofit request, implementing the callbacks
         // 用enqueue是為了在start的時候是在background thread
-        TaipeiZooAeraApi.retrofitService.getProperties("resourceAquire").enqueue( object: Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
+//        TaipeiZooAreaApi.retrofitService.getProperties("resourceAquire").enqueue( object: Callback<GetResult> {
+//            override fun onFailure(call: Call<GetResult>, t: Throwable) {
+//                _response.value = "Failure: " + t.message
+//            }
+//
+//            override fun onResponse(call: Call<GetResult>, response: Response<GetResult>) {
+//                _response.value = "Success: ${response.body()} Taipei Zoo Area retrieved"
+//                var qq = 0
+//                qq++
+//            }
+//        })
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+//        TaipeiZooAreaApi.retrofitService.fetchPirateList().enqueue(object : Callback<PirateResponse> {
+//            override fun onResponse(
+//                call: Call<PirateResponse>,
+//                response: Response<PirateResponse>
+//            ) {
+//                Log.d("QQ", "response: ${response.body().toString()}")
+//            }
+//
+//            override fun onFailure(call: Call<PirateResponse>, t: Throwable) {
+//                Log.d("QQ", "error: ${t.message}" ?: "Get some error")
+//            }
+//        })
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        TaipeiZooAreaApi.retrofitService.getProperties().enqueue(object: Callback<List<MarsProperty>> {
+            override fun onFailure(call: Call<List<MarsProperty>>, t: Throwable) {
                 _response.value = "Failure: " + t.message
             }
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
-                var qq = 0
-                qq++
+            override fun onResponse(call: Call<List<MarsProperty>>, response: Response<List<MarsProperty>>) {
+                _response.value = "Success: ${response.body()?.size} Mars properties retrieved"
             }
         })
+
     }
 
 }
