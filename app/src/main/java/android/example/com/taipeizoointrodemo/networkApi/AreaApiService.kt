@@ -1,7 +1,9 @@
 package android.example.com.taipeizoointrodemo.networkApi
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -21,6 +23,8 @@ private val moshi = Moshi.Builder()
 private val retrofit = Retrofit.Builder()
     // MoshiConverterFactory可讓retrofit使用Moshi去convert Json object
     .addConverterFactory(MoshiConverterFactory.create(moshi))
+    // Enable Retrofit creates Coroutine based api
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL) // server的url
     .build()
 // ScalarsConverterFactory可讓JSON訊息變成String
@@ -33,7 +37,7 @@ interface TaipeiZooAreaApiService {
     // The end point for the JSON response is realestate
     @GET("5a0e5fbb-72f8-41c6-908e-2fb25eff9b8a")
     fun getProperties(@Query("scope") type: String):
-            Call<GetResult>
+            Deferred<GetResult>
 }
 
 // Create the MarsApi object using Retrofit to implement the MarsApiService

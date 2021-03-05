@@ -11,9 +11,9 @@ data class GetResult(
 
 @JsonClass(generateAdapter = true)
 data class AreaJsonStructure(
-    val limit: Double,
-    val offset: Double,
-    val count: Double,
+    val limit: Int,
+    val offset: Int,
+    val count: Int,
     val sort: String?,
     val results: List<EachAreaResults>
 
