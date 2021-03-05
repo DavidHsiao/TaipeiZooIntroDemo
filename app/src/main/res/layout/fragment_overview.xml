@@ -4,9 +4,9 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--<variable-->
-                <!--name="viewModel"-->
-                <!--type="com.example.android.marsrealestate.overview.OverviewViewModel" />-->
+        <variable
+                name="viewModel"
+                type="android.example.com.taipeizoointrodemo.overview.OverviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,8 +24,9 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:listData="@{viewModel.properties}"
-                tools:listitem="@layout/grid_view_item"/>
+                />
+        <!--app:listData="@{viewModel.properties}"-->
+        <!--tools:listitem="@layout/grid_view_item"-->
 
         <ImageView
                 android:id="@+id/status_image"
@@ -35,7 +36,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:marsApiStatus="@{viewModel.status}" />
+                 />
+        <!--app:marsApiStatus="@{viewModel.status}"-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
