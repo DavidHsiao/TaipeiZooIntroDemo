@@ -31,7 +31,7 @@ class OverviewViewModel : ViewModel() {
 
         // Call the MarsApi to enqueue the Retrofit request, implementing the callbacks
         // 用enqueue是為了在start的時候是在background thread
-        TaipeiZooAeraApi.retrofitService.getProperties().enqueue( object: Callback<String> {
+        TaipeiZooAeraApi.retrofitService.getProperties("resourceAquire").enqueue( object: Callback<String> {
             override fun onFailure(call: Call<String>, t: Throwable) {
                 _response.value = "Failure: " + t.message
             }
@@ -42,7 +42,6 @@ class OverviewViewModel : ViewModel() {
                 qq++
             }
         })
-//        _response.value = "Set the Mars API Response here!"
     }
 
 }
