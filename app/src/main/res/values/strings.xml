@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TaipeiZooIntroDemo</string>
+    <string name="no_memo_info">無館別相關資訊</string>
 </resources>

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class AreaListAdapter : ListAdapter<EachAreaResults, AreaListAdapter.TaipeiZooAreaViewHolder>(DiffCallback) {
+class AreaListAdapter(val onClickListener: OnClickListener) : ListAdapter<EachAreaResults, AreaListAdapter.TaipeiZooAreaViewHolder>(DiffCallback) {
 
     class TaipeiZooAreaViewHolder(private var binding: OverviewItemBinding):
         RecyclerView.ViewHolder(binding.root) {
@@ -34,6 +34,11 @@ class AreaListAdapter : ListAdapter<EachAreaResults, AreaListAdapter.TaipeiZooAr
      */
     override fun onBindViewHolder(holder: TaipeiZooAreaViewHolder, position: Int) {
         val zooArea = getItem(position)
+        // Call the onClick Function from the onClickListener in a lambda from setOnClickListener
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(zooArea)
+        }
+
         holder.bind(zooArea)
     }
 
@@ -51,5 +56,15 @@ class AreaListAdapter : ListAdapter<EachAreaResults, AreaListAdapter.TaipeiZooAr
             return oldItem._id == newItem._id
         }
     }
+
+    /**
+     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [MarsProperty]
+     * associated with the current item to the [onClick] function.
+     * @param clickListener lambda that will be called with the current [MarsProperty]
+     */
+    class OnClickListener(val clickListener: (eachAreaResults: EachAreaResults) -> Unit) {
+        fun onClick(eachAreaResults: EachAreaResults) = clickListener(eachAreaResults)
+    }
+
 
 }

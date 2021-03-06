@@ -5,5 +5,16 @@
 
     <fragment android:id="@+id/overviewFragment"
               android:name="android.example.com.taipeizoointrodemo.overview.OverviewFragment"
-              android:label="OverviewFragment"/>
+              android:label="OverviewFragment">
+        <action android:id="@+id/action_showArea"
+                app:destination="@id/areaDetailFragment"/>
+    </fragment>
+    <fragment android:id="@+id/areaDetailFragment"
+              android:name="android.example.com.taipeizoointrodemo.areaDetail.AreaDetailFragment"
+              android:label="AreaDetailFragment">
+        <argument
+                android:name="selectedArea"
+                app:argType="android.example.com.taipeizoointrodemo.networkApi.EachAreaResults"
+        />
+    </fragment>
 </navigation>

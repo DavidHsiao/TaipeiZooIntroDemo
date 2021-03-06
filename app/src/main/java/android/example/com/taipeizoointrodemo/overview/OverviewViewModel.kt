@@ -31,6 +31,14 @@ class OverviewViewModel : ViewModel() {
     val area: LiveData<List<EachAreaResults>>
         get() = _area
 
+    // Internally, we use a MutableLiveData to handle navigation to the selected property
+    private val _navigateToSelectedArea = MutableLiveData<EachAreaResults>()
+
+    // The external immutable LiveData for the navigation property
+    val navigateToSelectedArea: LiveData<EachAreaResults>
+        get() = _navigateToSelectedArea
+
+
 
     // 因為使用Coroutine, 所以要建立Job
     private var viewModelJob = Job()
@@ -77,5 +85,21 @@ class OverviewViewModel : ViewModel() {
         super.onCleared()
         viewModelJob.cancel()
     }
+
+    /**
+     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
+     * @param marsProperty The [MarsProperty] that was clicked on.
+     */
+    fun displayAreaDetails(eachAreaResults: EachAreaResults) {
+        _navigateToSelectedArea.value = eachAreaResults
+    }
+
+    /**
+     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+     */
+    fun displayAreaDetailsComplete() {
+        _navigateToSelectedArea.value = null
+    }
+
 
 }
