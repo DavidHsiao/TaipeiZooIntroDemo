@@ -2,6 +2,8 @@ package android.example.com.taipeizoointrodemo
 
 import android.example.com.taipeizoointrodemo.networkApi.EachAreaResults
 import android.example.com.taipeizoointrodemo.overview.AreaListAdapter
+import android.example.com.taipeizoointrodemo.overview.TaipeiZooAreaApiStatus
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -40,3 +42,27 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 }
+
+/**
+ * This binding adapter displays the [zooAreaApiStatus] of the network request in an image view.  When
+ * the request is loading, it displays a loading_animation.  If the request has an error, it
+ * displays a broken image to reflect the connection error.  When the request is finished, it
+ * hides the image view.
+ */
+@BindingAdapter("zooAreaApiStatus")
+fun bindStatus(statusImageView: ImageView, status: TaipeiZooAreaApiStatus?) {
+    when (status) {
+        TaipeiZooAreaApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        TaipeiZooAreaApiStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        TaipeiZooAreaApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
+    }
+}
+

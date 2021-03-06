@@ -11,15 +11,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+enum class TaipeiZooAreaApiStatus { LOADING, ERROR, DONE }
+
 class OverviewViewModel : ViewModel() {
 
     private val TAG = OverviewViewModel::class.java.simpleName
 
     // The internal MutableLiveData String that stores the status of the most recent request
-    private val _status = MutableLiveData<String>()
+    private val _status = MutableLiveData<TaipeiZooAreaApiStatus>()
 
     // The external immutable LiveData for the request status String
-    val status: LiveData<String>
+    val status: LiveData<TaipeiZooAreaApiStatus>
         get() = _status
 
     // Internally, we use a MutableLiveData, because we will be updating the MarsProperty with new values
@@ -35,7 +37,7 @@ class OverviewViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     /**
-     * Call getMarsRealEstateProperties() on init so we can display status immediately.
+     * Call getTaipeiZooArea() on init so we can display status immediately.
      */
     init {
         getTaipeiZooArea()
@@ -52,18 +54,20 @@ class OverviewViewModel : ViewModel() {
 
             // 用try catch一樣可以達到先前callback方式有的error handling
             try {
+                _status.value = TaipeiZooAreaApiStatus.LOADING
                 // 等到收到request才繼續執行，await是non-blocking, 目前執行在main thread也OK
                 // Await the completion of our Retrofit request
                 var listResult = getTaipeiZooAreaDeferred.await()
-                _status.value = "Success: ${listResult.result.count} Mars properties retrieved"
-                Log.d(TAG, "Success: ${listResult.result.count} Mars properties retrieved")
+                _status.value = TaipeiZooAreaApiStatus.DONE
+                Log.d(TAG, "getTaipeiZooArea Success, result count =  ${listResult.result.count}")
 
-                // 將第一筆result放入property
+                // 將第一筆result資料放入
                 if (listResult.result.count > 0) {
                     _area.value = listResult.result.results
                 }
             } catch (e: Exception) {
-                _status.value = "Failure: ${e.message}"
+                _status.value = TaipeiZooAreaApiStatus.ERROR
+                _area.value = ArrayList()
             }
         }
     }
