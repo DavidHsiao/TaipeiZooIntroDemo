@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -31,18 +32,17 @@ private val retrofit = Retrofit.Builder()
 
 
 // Implement the MarsApiService interface with @GET getArea returning a String
-interface TaipeiZooAreaApiService {
+interface AreaPlantApiService {
     // 定義我們希望這個method使用的end point or path
     // The end point for the JSON response is realestate
-    @GET("5a0e5fbb-72f8-41c6-908e-2fb25eff9b8a")
-    fun getArea(@Query("scope") type: String):
-            Deferred<GetAreaResult>
+    @GET("f18de02f-b6c9-47c0-8cda-50efad621c14?scope=resourceAquire&limit=10")
+    fun getPlants():
+            Deferred<GetPlantResult>
 }
 
 // Create the MarsApi object using Retrofit to implement the MarsApiService
-object TaipeiZooAreaApi {
-    val retrofitService: TaipeiZooAreaApiService by lazy {
-        retrofit.create(TaipeiZooAreaApiService::class.java)
+object AreaPlantApi {
+    val retrofitService: AreaPlantApiService by lazy {
+        retrofit.create(AreaPlantApiService::class.java)
     }
 }
-

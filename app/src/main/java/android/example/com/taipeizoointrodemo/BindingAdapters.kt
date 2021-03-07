@@ -1,8 +1,10 @@
 package android.example.com.taipeizoointrodemo
 
+import android.example.com.taipeizoointrodemo.areaDetail.PlantListAdapter
+import android.example.com.taipeizoointrodemo.constant.ApiStatus
 import android.example.com.taipeizoointrodemo.networkApi.EachAreaResults
+import android.example.com.taipeizoointrodemo.networkApi.PlantResults
 import android.example.com.taipeizoointrodemo.overview.AreaListAdapter
-import android.example.com.taipeizoointrodemo.overview.TaipeiZooAreaApiStatus
 import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
@@ -17,6 +19,12 @@ import com.bumptech.glide.request.RequestOptions
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<EachAreaResults>?) {
     val adapter = recyclerView.adapter as AreaListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("plantListData")
+fun bindPlantRecyclerView(recyclerView: RecyclerView, data: List<PlantResults>?) {
+    val adapter = recyclerView.adapter as PlantListAdapter
     adapter.submitList(data)
 }
 
@@ -50,17 +58,17 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
  * hides the image view.
  */
 @BindingAdapter("zooAreaApiStatus")
-fun bindStatus(statusImageView: ImageView, status: TaipeiZooAreaApiStatus?) {
+fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
     when (status) {
-        TaipeiZooAreaApiStatus.LOADING -> {
+        ApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        TaipeiZooAreaApiStatus.ERROR -> {
+        ApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        TaipeiZooAreaApiStatus.DONE -> {
+        ApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }

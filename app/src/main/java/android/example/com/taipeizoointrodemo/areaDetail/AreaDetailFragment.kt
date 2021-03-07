@@ -20,9 +20,14 @@ class AreaDetailFragment : Fragment(){
         // Create the DetailViewModelFactory using the marsProperty and application
         val viewModelFactory = AreaDetailViewModelFactory(marsProperty, application)
 
+        val viewModel = ViewModelProviders.of(
+                this, viewModelFactory).get(AreaDetailViewModel::class.java)
         // Get the DetailViewModel from the DetailViewModelFactory and set it in the binding
-        binding.viewModel = ViewModelProviders.of(
-            this, viewModelFactory).get(AreaDetailViewModel::class.java)
+        binding.viewModel =viewModel
+
+        binding.rvPlantList.adapter = PlantListAdapter(PlantListAdapter.OnClickListener{
+            viewModel.displayPlantDetails(it)
+        })
 
         return binding.root
     }
