@@ -32,6 +32,7 @@ data class EachAreaResults(
     val E_Category: String,
     val E_Name: String,
     val E_Memo: String?,
+    val E_URL: String?,
     val _id: Double
 ) : Parcelable {
     val haveMomoInfo

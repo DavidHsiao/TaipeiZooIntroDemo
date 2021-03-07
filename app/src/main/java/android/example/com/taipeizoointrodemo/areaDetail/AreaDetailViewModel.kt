@@ -81,7 +81,7 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : 
 
         coroutineScope.launch {
             // Get the Deferred object for our Retrofit request
-            var getTaipeiZooPlantDeferred = AreaPlantApi.retrofitService.getPlants()
+            var getTaipeiZooPlantDeferred = AreaPlantApi.retrofitService.getPlants(_selectedArea.value!!.E_Name!!)
 
             // 用try catch一樣可以達到先前callback方式有的error handling
             try {

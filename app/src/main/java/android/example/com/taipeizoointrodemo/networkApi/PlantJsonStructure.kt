@@ -24,8 +24,8 @@ data class PlantJsonStructure(
 @JsonClass(generateAdapter = true)
 data class PlantResults(
     @Json(name = "F_Pic01_URL") val imgSrcUrl : String,
-
-    @Json(name = "F_Name_Ch") val f_Name_Ch : String?,
+    // 因為後台API在F_Name_Ch前面有個0x35的字元，因此這樣設置
+    @Json(name = "﻿F_Name_Ch") val f_Name_Ch : String?,
 
     @Json(name = "F_AlsoKnown") val f_AlsoKnown : String,
 

@@ -46,3 +46,19 @@ object TaipeiZooAreaApi {
     }
 }
 
+// Implement the MarsApiService interface with @GET getArea returning a String
+interface AreaPlantApiService {
+    // 定義我們希望這個method使用的end point or path
+    // The end point for the JSON response is realestate
+    @GET("f18de02f-b6c9-47c0-8cda-50efad621c14?scope=resourceAquire&limit=109")
+    fun getPlants(@Query("q") type: String):
+            Deferred<GetPlantResult>
+}
+
+// Create the MarsApi object using Retrofit to implement the MarsApiService
+object AreaPlantApi {
+    val retrofitService: AreaPlantApiService by lazy {
+        retrofit.create(AreaPlantApiService::class.java)
+    }
+}
+
