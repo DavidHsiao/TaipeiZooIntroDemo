@@ -44,7 +44,7 @@ class OverviewFragment : Fragment() {
         viewModel.navigateToSelectedArea.observe(this, Observer {
             if ( null != it ) {
                 // Must find the NavController from the Fragment
-                this.findNavController().navigate(OverviewFragmentDirections.actionShowArea(it))
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToAreaDetailFragment(it))
                 // 歸零
                 // Tell the ViewModel we've made the navigate call to prevent multiple navigation
                 viewModel.displayAreaDetailsComplete()

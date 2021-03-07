@@ -3,4 +3,8 @@
     <string name="no_memo_info">無館別相關資訊</string>
     <string name="plant_data">植物資料</string>
     <string name="open_from_browser">在網頁開啟</string>
+    <string name="nick_name">別名</string>
+    <string name="brief_info">簡介</string>
+    <string name="identify_method">辨識方法</string>
+    <string name="functionality">功能性</string>
 </resources>

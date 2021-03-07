@@ -21,15 +21,26 @@ data class PlantJsonStructure(
 
 )
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class PlantResults(
-    @Json(name = "F_Pic01_URL") val imgSrcUrl : String,
+    @Json(name = "F_Pic01_URL") val imgSrcUrl: String,
     // 因為後台API在F_Name_Ch前面有個0x35的字元，因此這樣設置
-    @Json(name = "﻿F_Name_Ch") val f_Name_Ch : String?,
+    @Json(name = "﻿F_Name_Ch") val f_Name_Ch: String?,
 
-    @Json(name = "F_AlsoKnown") val f_AlsoKnown : String,
+    @Json(name = "F_AlsoKnown") val f_AlsoKnown: String,
 
-    @Json(name = "_id") val _id : Int
+    @Json(name = "F_Name_En") val f_Name_En: String?,
+
+    @Json(name = "F_Brief") val f_Brief: String?,
+
+    @Json(name = "F_Feature") val f_Feature: String?,
+
+    @Json(name = "F_Function＆Application") val f_Function_Application: String?,
+
+    @Json(name = "F_Update") val f_Update: String?,
+
+    @Json(name = "_id") val _id: Int
 
 //    @Json(name = "F_Name_Latin") val f_Name_Latin : String,
 //    @Json(name = "F_pdf02_ALT") val f_pdf02_ALT : String,
@@ -48,11 +59,11 @@ data class PlantResults(
 //    @Json(name = "F_AlsoKnown") val f_AlsoKnown : String,
 //    @Json(name = "F_Voice02_ALT") val f_Voice02_ALT : String,
 //    @Json(name = "F_Pic04_ALT") val f_Pic04_ALT : String,
-//    @Json(name = "F_Name_En") val f_Name_En : String,
-//    @Json(name = "F_Brief") val f_Brief : String,
+
+
 //    @Json(name = "F_Pic04_URL") val f_Pic04_URL : String,
 //    @Json(name = "F_Voice01_URL") val f_Voice01_URL : String,
-//    @Json(name = "F_Feature") val f_Feature : String,
+
 //    @Json(name = "F_Pic02_ALT") val f_Pic02_ALT : String,
 //    @Json(name = "F_Family") val f_Family : String,
 //    @Json(name = "F_Voice03_ALT") val f_Voice03_ALT : String,
@@ -63,8 +74,8 @@ data class PlantResults(
 //    @Json(name = "F_pdf01_URL") val f_pdf01_URL : String,
 //    @Json(name = "F_Vedio_URL") val f_Vedio_URL : String,
 //    @Json(name = "F_Genus") val f_Genus : String,
-//    @Json(name = "F_Function＆Application") val f_Function_Application : String,
+
 //    @Json(name = "F_Voice03_URL") val f_Voice03_URL : String,
-//    @Json(name = "F_Update") val f_Update : String,
+
 //    @Json(name = "_id") val _id : Int
-)
+) : Parcelable
