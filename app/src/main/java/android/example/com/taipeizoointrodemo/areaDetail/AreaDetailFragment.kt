@@ -1,7 +1,6 @@
 package android.example.com.taipeizoointrodemo.areaDetail
 
 import android.example.com.taipeizoointrodemo.databinding.FragmentAreaDetailBinding
-import android.example.com.taipeizoointrodemo.overview.OverviewFragmentDirections
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +16,12 @@ class AreaDetailFragment : Fragment(){
         val binding = FragmentAreaDetailBinding.inflate(inflater)
         binding.setLifecycleOwner(this)
 
+
         // Get the selectedProperty from the fragment arguments with DetailFragmentArgs
         val area = AreaDetailFragmentArgs.fromBundle(arguments!!).selectedArea
 
         // Create the DetailViewModelFactory using the marsProperty and application
-        val viewModelFactory = AreaDetailViewModelFactory(area, application)
+        val viewModelFactory = AreaDetailViewModelFactory(area, application, activity!!)
 
         val viewModel = ViewModelProviders.of(
                 this, viewModelFactory).get(AreaDetailViewModel::class.java)
@@ -45,6 +45,7 @@ class AreaDetailFragment : Fragment(){
             }
         })
 
+        activity!!.title = area.E_Name
 
         return binding.root
     }

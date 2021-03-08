@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TaipeiZooIntroDemo</string>
+    <string name="taipei_zoo">台北市立動物園</string>
     <string name="no_memo_info">無館別相關資訊</string>
     <string name="plant_data">植物資料</string>
     <string name="open_from_browser">在網頁開啟</string>

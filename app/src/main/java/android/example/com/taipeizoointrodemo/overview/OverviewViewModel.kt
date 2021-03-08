@@ -13,7 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-class OverviewViewModel : ViewModel() {
+class OverviewViewModel() : ViewModel() {
 
     private val TAG = OverviewViewModel::class.java.simpleName
 

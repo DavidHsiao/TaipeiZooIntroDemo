@@ -1,7 +1,7 @@
 package android.example.com.taipeizoointrodemo.overview
 
+import android.example.com.taipeizoointrodemo.R
 import android.example.com.taipeizoointrodemo.databinding.FragmentOverviewBinding
-import android.hardware.Camera
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +13,6 @@ import androidx.navigation.fragment.findNavController
 
 class OverviewFragment : Fragment() {
 
-    /**
-     * Lazily initialize our [OverviewViewModel].
-     */
-    private val viewModel: OverviewViewModel by lazy {
-        ViewModelProviders.of(this).get(OverviewViewModel::class.java)
-    }
 
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
@@ -26,7 +20,13 @@ class OverviewFragment : Fragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         val binding = FragmentOverviewBinding.inflate(inflater)
+
+        // Create the DetailViewModelFactory using the marsProperty and application
+        val viewModelFactory = OverviewViewModelFactory()
+
+        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(OverviewViewModel::class.java)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
@@ -51,7 +51,7 @@ class OverviewFragment : Fragment() {
             }
         })
 
-
+        activity!!.title = getString(R.string.taipei_zoo)
         setHasOptionsMenu(true)
         return binding.root
     }

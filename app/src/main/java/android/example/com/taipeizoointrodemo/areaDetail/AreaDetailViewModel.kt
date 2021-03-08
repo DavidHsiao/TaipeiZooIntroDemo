@@ -1,13 +1,12 @@
 package android.example.com.taipeizoointrodemo.areaDetail
 
+import android.app.Activity
 import android.app.Application
 import android.example.com.taipeizoointrodemo.R
 import android.example.com.taipeizoointrodemo.constant.ApiStatus
 import android.example.com.taipeizoointrodemo.networkApi.AreaPlantApi
 import android.example.com.taipeizoointrodemo.networkApi.EachAreaResults
-import android.example.com.taipeizoointrodemo.networkApi.GetPlantResult
 import android.example.com.taipeizoointrodemo.networkApi.PlantResults
-import android.example.com.taipeizoointrodemo.overview.OverviewViewModel
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -16,11 +15,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : AndroidViewModel(app) {
+class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application, activity: Activity) : AndroidViewModel(app) {
 
     private val TAG = AreaDetailViewModel::class.java.simpleName
 
@@ -58,6 +54,7 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : 
 
     init {
         _selectedArea.value = eachAreaResults
+        activity.title = selectedArea.value?.E_Name
         getTaipeiZooPlant()
     }
 

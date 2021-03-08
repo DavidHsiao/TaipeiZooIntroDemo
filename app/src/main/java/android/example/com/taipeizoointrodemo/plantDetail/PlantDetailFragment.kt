@@ -21,7 +21,7 @@ class PlantDetailFragment : Fragment(){
         val plant = PlantDetailFragmentArgs.fromBundle(arguments!!).selectedPlant
 
         // Create the DetailViewModelFactory using the marsProperty and application
-        val viewModelFactory = PlantDetailViewModelFactory(plant, application)
+        val viewModelFactory = PlantDetailViewModelFactory(plant, application, activity!!)
 
         val viewModel = ViewModelProviders.of(
             this, viewModelFactory).get(PlantDetailViewModel::class.java)
