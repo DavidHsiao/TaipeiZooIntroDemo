@@ -19,7 +19,8 @@
                 app:argType="android.example.com.taipeizoointrodemo.networkApi.EachAreaResults"
         />
         <action android:id="@+id/action_areaDetailFragment_to_plantDetailFragment"
-                app:destination="@id/plantDetailFragment"/>
+                app:destination="@id/plantDetailFragment" app:enterAnim="@anim/fade_in" app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in" app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment android:id="@+id/plantDetailFragment"
               android:name="android.example.com.taipeizoointrodemo.plantDetail.PlantDetailFragment"
