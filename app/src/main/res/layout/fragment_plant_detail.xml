@@ -22,64 +22,103 @@
                     tools:srcCompat="@tools:sample/avatars"
                     app:imageUrl="@{viewModel.selectedPlant.imgSrcUrl}"
                     android:scaleType="centerCrop"
-                    />
+
+            />
             <TextView
                     android:id="@+id/tv_name_ch"
                     android:text="@{viewModel.selectedPlant.f_Name_Ch}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     />
             <TextView
                     android:id="@+id/tv_name_eng"
                     android:text="@{viewModel.selectedPlant.f_Name_En}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     />
             <TextView
                     android:text="@string/nick_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_nickname_title"/>
+                    android:id="@+id/tv_nickname_title"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_AlsoKnown}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_nickname_content"/>
+                    android:id="@+id/tv_nickname_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@string/brief_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_brief_title"/>
+                    android:id="@+id/tv_brief_title"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Brief}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_brief_content"/>
+                    android:id="@+id/tv_brief_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@string/identify_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_feature_title"/>
+                    android:id="@+id/tv_feature_title"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Feature}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_feature_content"/>
+                    android:id="@+id/tv_feature_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@string/functionality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_function_title"/>
+                    android:id="@+id/tv_function_title"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Function_Application}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_function_content"/>
+                    android:id="@+id/tv_function_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Update}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_last_update"/>
+                    android:id="@+id/tv_last_update"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+            />
         </LinearLayout>
     </ScrollView>
 </layout>
