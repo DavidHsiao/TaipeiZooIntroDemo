@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 
@@ -21,12 +22,14 @@ class PlantDetailFragment : Fragment(){
         val plant = PlantDetailFragmentArgs.fromBundle(arguments!!).selectedPlant
 
         // Create the DetailViewModelFactory using the marsProperty and application
-        val viewModelFactory = PlantDetailViewModelFactory(plant, application, activity!!)
+        val viewModelFactory = PlantDetailViewModelFactory(plant, application)
 
         val viewModel = ViewModelProviders.of(
             this, viewModelFactory).get(PlantDetailViewModel::class.java)
         // Get the DetailViewModel from the DetailViewModelFactory and set it in the binding
         binding.viewModel =viewModel
+
+        (activity as AppCompatActivity).supportActionBar?.title = plant.f_Name_Ch
 
         return binding.root
     }

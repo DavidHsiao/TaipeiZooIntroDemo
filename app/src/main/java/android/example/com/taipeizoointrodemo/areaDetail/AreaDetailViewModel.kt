@@ -1,6 +1,5 @@
 package android.example.com.taipeizoointrodemo.areaDetail
 
-import android.app.Activity
 import android.app.Application
 import android.example.com.taipeizoointrodemo.R
 import android.example.com.taipeizoointrodemo.constant.ApiStatus
@@ -16,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application, activity: Activity) : AndroidViewModel(app) {
+class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : AndroidViewModel(app) {
 
     private val TAG = AreaDetailViewModel::class.java.simpleName
 
@@ -54,7 +53,6 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application, ac
 
     init {
         _selectedArea.value = eachAreaResults
-        activity.title = selectedArea.value?.E_Name
         getTaipeiZooPlant()
     }
 

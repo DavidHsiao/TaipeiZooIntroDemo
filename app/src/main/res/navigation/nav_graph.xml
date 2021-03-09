@@ -5,7 +5,7 @@
 
     <fragment android:id="@+id/overviewFragment"
               android:name="android.example.com.taipeizoointrodemo.overview.OverviewFragment"
-              android:label="OverviewFragment">
+              >
         <action android:id="@+id/action_overviewFragment_to_areaDetailFragment"
                 app:destination="@id/areaDetailFragment" app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment android:id="@+id/areaDetailFragment"
               android:name="android.example.com.taipeizoointrodemo.areaDetail.AreaDetailFragment"
-              android:label="AreaDetailFragment">
+              >
         <argument
                 android:name="selectedArea"
                 app:argType="android.example.com.taipeizoointrodemo.networkApi.EachAreaResults"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment android:id="@+id/plantDetailFragment"
               android:name="android.example.com.taipeizoointrodemo.plantDetail.PlantDetailFragment"
-              android:label="PlantDetailFragment">
+              >
         <argument android:name="selectedPlant"
                   app:argType="android.example.com.taipeizoointrodemo.networkApi.PlantResults"/>
     </fragment>

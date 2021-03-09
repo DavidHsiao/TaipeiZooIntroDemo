@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,7 +22,7 @@ class AreaDetailFragment : Fragment(){
         val area = AreaDetailFragmentArgs.fromBundle(arguments!!).selectedArea
 
         // Create the DetailViewModelFactory using the marsProperty and application
-        val viewModelFactory = AreaDetailViewModelFactory(area, application, activity!!)
+        val viewModelFactory = AreaDetailViewModelFactory(area, application)
 
         val viewModel = ViewModelProviders.of(
                 this, viewModelFactory).get(AreaDetailViewModel::class.java)
@@ -45,7 +46,7 @@ class AreaDetailFragment : Fragment(){
             }
         })
 
-        activity!!.title = area.E_Name
+        (activity as AppCompatActivity).supportActionBar?.title = area.E_Name
 
         return binding.root
     }
