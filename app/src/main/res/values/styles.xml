@@ -14,8 +14,20 @@
         <item name= "android:fontFamily" > sans-serif-light </item>
     </style>
 
-    <style name="TextSize_SubTitle" parent="android:TextAppearance">
-        <item name="android:textSize">18sp</item>
+    <style name="TextSize_Title" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/title</item>
         <item name= "android:textViewStyle" > @style/RobotoTextViewStyle </item>
     </style>
+
+    <style name="TextSize_SubTitle" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/subtitle</item>
+        <item name= "android:textViewStyle" > @style/RobotoTextViewStyle </item>
+    </style>
+
+    <style name="TextSize_SectionTitle" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/content</item>
+        <item name="android:textStyle">bold</item>
+        <item name= "android:textViewStyle" > @style/RobotoTextViewStyle </item>
+    </style>
+
 </resources>

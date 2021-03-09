@@ -65,7 +65,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@+id/tv_indoor_outdoor"
-                    android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/tv_indoor_outdoor"/>
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_indoor_outdoor"
+                    style="@style/TextSize_Title"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_plant_list"
@@ -79,10 +81,27 @@
                     app:layout_constraintEnd_toEndOf="@+id/tv_intro_msg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:nestedScrollingEnabled="false"
                     app:plantListData="@{viewModel.plant}"
                     tools:listitem="@layout/plant_item"
                     android:scrollbars="vertical"/>
+            <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    tools:srcCompat="@tools:sample/avatars"
+                    android:id="@+id/load_status_image"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_plant_data_title"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:zooAreaApiStatus="@{viewModel.status}"
+                    android:elevation="30dp"
+            />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

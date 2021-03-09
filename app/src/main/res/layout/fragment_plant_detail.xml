@@ -32,6 +32,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    style="@style/TextSize_SubTitle"
                     />
             <TextView
                     android:id="@+id/tv_name_eng"
@@ -40,6 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    style="@style/TextSize_SubTitle"
                     />
             <TextView
                     android:text="@string/nick_name"
@@ -49,6 +51,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    style="@style/TextSize_SectionTitle"
             />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_AlsoKnown}"
@@ -66,6 +69,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    style="@style/TextSize_SectionTitle"
             />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Brief}"
@@ -83,6 +87,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    style="@style/TextSize_SectionTitle"
             />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Feature}"
@@ -100,6 +105,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    style="@style/TextSize_SectionTitle"
             />
             <TextView
                     android:text="@{viewModel.selectedPlant.f_Function_Application}"
@@ -110,7 +116,7 @@
                     android:layout_marginStart="8dp"
             />
             <TextView
-                    android:text="@{viewModel.selectedPlant.f_Update}"
+                    android:text="@{viewModel.displayLastUpdateTime}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_last_update"
