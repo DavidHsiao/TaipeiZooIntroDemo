@@ -54,6 +54,9 @@ class AreaDetailFragment : Fragment(){
 
         binding.tvHyperlink.movementMethod = LinkMovementMethod.getInstance()
 
+//        var layoutManager = LinearLayoutManager(activity).isAutoMeasureEnabled
+//        binding.rvPlantList.layoutManager =layoutManager
+
         return binding.root
     }
 }
