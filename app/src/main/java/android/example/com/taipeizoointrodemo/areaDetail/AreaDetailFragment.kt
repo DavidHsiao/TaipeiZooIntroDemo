@@ -2,6 +2,8 @@ package android.example.com.taipeizoointrodemo.areaDetail
 
 import android.example.com.taipeizoointrodemo.databinding.FragmentAreaDetailBinding
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,7 @@ class AreaDetailFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val application = requireNotNull(activity).application
         val binding = FragmentAreaDetailBinding.inflate(inflater)
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
 
         // Get the selectedProperty from the fragment arguments with DetailFragmentArgs
@@ -47,6 +49,10 @@ class AreaDetailFragment : Fragment(){
         })
 
         (activity as AppCompatActivity).supportActionBar?.title = area.E_Name
+
+        binding.tvHyperlink.text = Html.fromHtml("<a href='" + area.E_URL + "'>在網站開啟</a>")
+
+        binding.tvHyperlink.movementMethod = LinkMovementMethod.getInstance()
 
         return binding.root
     }

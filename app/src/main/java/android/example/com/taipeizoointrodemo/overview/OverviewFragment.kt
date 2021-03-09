@@ -30,7 +30,7 @@ class OverviewFragment : Fragment() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(OverviewViewModel::class.java)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
@@ -53,7 +53,6 @@ class OverviewFragment : Fragment() {
         })
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.taipei_zoo)
-        setHasOptionsMenu(true)
         return binding.root
     }
 

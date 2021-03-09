@@ -16,7 +16,7 @@ class PlantDetailFragment : Fragment(){
 
         val application = requireNotNull(activity).application
         val binding = FragmentPlantDetailBinding.inflate(inflater)
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         // Get the selectedProperty from the fragment arguments with DetailFragmentArgs
         val plant = PlantDetailFragmentArgs.fromBundle(arguments!!).selectedPlant

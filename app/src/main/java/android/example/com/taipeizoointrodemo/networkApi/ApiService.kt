@@ -50,7 +50,7 @@ object TaipeiZooAreaApi {
 interface AreaPlantApiService {
     // 定義我們希望這個method使用的end point or path
     // The end point for the JSON response is realestate
-    @GET("f18de02f-b6c9-47c0-8cda-50efad621c14?scope=resourceAquire&limit=109")
+    @GET("f18de02f-b6c9-47c0-8cda-50efad621c14?scope=resourceAquire&limit=220")
     fun getPlants(@Query("q") type: String):
             Deferred<GetPlantResult>
 }
