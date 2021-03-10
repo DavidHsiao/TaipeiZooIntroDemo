@@ -12,6 +12,8 @@ class PlantListAdapter(val onClickListener: OnClickListener) : ListAdapter<Plant
 
     class TaipeiZooPlantViewHolder(private var binding: PlantItemBinding):
         RecyclerView.ViewHolder(binding.root) {
+
+        binding.
         fun bind(zooPlant: PlantResults) {
             binding.plant = zooPlant
             // This is important, because it forces the data binding to execute immediately,
@@ -22,7 +24,7 @@ class PlantListAdapter(val onClickListener: OnClickListener) : ListAdapter<Plant
 
     // 建立全新的viewholder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaipeiZooPlantViewHolder {
-        return TaipeiZooPlantViewHolder(PlantItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return TaipeiZooPlantViewHolder(PlantItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     // Replaces the contents of a view (invoked by the layout manager)
