@@ -24,34 +24,34 @@ class OverviewFragment : Fragment() {
 
         val binding = FragmentOverviewBinding.inflate(inflater)
 
-        // Create the DetailViewModelFactory using the marsProperty and application
+        // 建立ViewModelFactory
         val viewModelFactory = OverviewViewModelFactory()
 
+        // 用ViewModelFactory建立ViewModel
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(OverviewViewModel::class.java)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
-
-        // Giving the binding access to the OverviewViewModel
+        // 設定ViewModel到Binding
         binding.viewModel = viewModel
 
+        // 讓Data Binding依照Fragment的lifecycle來觀察LiveData
+        binding.lifecycleOwner = this
+
+        // 設定RecyclerView的adapter
         binding.areaList.adapter = AreaListAdapter(AreaListAdapter.OnClickListener{
             viewModel.displayAreaDetails(it)
         })
 
-        // Observe the navigateToSelectedProperty LiveData and Navigate when it isn't null
-        // After navigating, call displayPropertyDetailsComplete() so that the ViewModel is ready
-        // for another navigation event.
+        // 觀察ViewModel中的變數
         viewModel.navigateToSelectedArea.observe(this, Observer {
             if ( null != it ) {
-                // Must find the NavController from the Fragment
+                // 跳轉Fragment
                 this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToAreaDetailFragment(it))
                 // 歸零
-                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
                 viewModel.displayAreaDetailsComplete()
             }
         })
 
+        // 更改ActionBar的文字
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.taipei_zoo)
         return binding.root
     }

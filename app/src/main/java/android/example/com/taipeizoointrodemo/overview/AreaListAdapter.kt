@@ -15,26 +15,20 @@ class AreaListAdapter(val onClickListener: OnClickListener) : ListAdapter<EachAr
         fun bind(zooArea: EachAreaResults) {
             binding.area = zooArea
             // This is important, because it forces the data binding to execute immediately,
-            // which allows the RecyclerView to make the correct view size measurements
-
-            // update immediately
+            // which allows the RecyclerView to make the correct view size measurements update immediately
             binding.executePendingBindings()
         }
     }
 
-    /**
-     * Create new [RecyclerView] item views (invoked by the layout manager)
-     */
-    // 觸發時會建立全新的viewholder
+    // 建立全新的viewholder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaipeiZooAreaViewHolder {
         return TaipeiZooAreaViewHolder(OverviewItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
-    /**
-     * Replaces the contents of a view (invoked by the layout manager)
-     */
+
+    // Replaces the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: TaipeiZooAreaViewHolder, position: Int) {
         val zooArea = getItem(position)
-        // Call the onClick Function from the onClickListener in a lambda from setOnClickListener
+        // 呼叫onClick Function
         holder.itemView.setOnClickListener {
             onClickListener.onClick(zooArea)
         }
@@ -42,11 +36,9 @@ class AreaListAdapter(val onClickListener: OnClickListener) : ListAdapter<EachAr
         holder.bind(zooArea)
     }
 
-    /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [MarsProperty]
-     * has been updated.
-     */
+    // 檢查RecyclerView中各item的內容是否有變
     companion object DiffCallback : DiffUtil.ItemCallback<EachAreaResults>() {
+
         override fun areItemsTheSame(oldItem: EachAreaResults, newItem: EachAreaResults): Boolean {
             // 三個=代表所有的東西全部都一樣
             return oldItem === newItem
@@ -57,11 +49,7 @@ class AreaListAdapter(val onClickListener: OnClickListener) : ListAdapter<EachAr
         }
     }
 
-    /**
-     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [MarsProperty]
-     * associated with the current item to the [onClick] function.
-     * @param clickListener lambda that will be called with the current [MarsProperty]
-     */
+    // handles clicks on [RecyclerView] items.
     class OnClickListener(val clickListener: (eachAreaResults: EachAreaResults) -> Unit) {
         fun onClick(eachAreaResults: EachAreaResults) = clickListener(eachAreaResults)
     }

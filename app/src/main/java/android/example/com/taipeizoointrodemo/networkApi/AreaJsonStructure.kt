@@ -11,6 +11,9 @@ data class GetAreaResult(
 
 )
 
+/**
+ * * 館別資訊API的資料結構
+ */
 @JsonClass(generateAdapter = true)
 data class AreaJsonStructure(
     val limit: Int,

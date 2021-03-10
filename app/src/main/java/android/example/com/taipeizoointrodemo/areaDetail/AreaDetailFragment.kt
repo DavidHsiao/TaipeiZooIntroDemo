@@ -20,24 +20,24 @@ class AreaDetailFragment : Fragment(){
         binding.lifecycleOwner = this
 
 
-        // Get the selectedProperty from the fragment arguments with DetailFragmentArgs
+        // 紀錄從OverviewFragment選中的館別資料
         val area = AreaDetailFragmentArgs.fromBundle(arguments!!).selectedArea
 
-        // Create the DetailViewModelFactory using the marsProperty and application
+        // 建立ViewModelFactory
         val viewModelFactory = AreaDetailViewModelFactory(area, application)
 
-        val viewModel = ViewModelProviders.of(
-                this, viewModelFactory).get(AreaDetailViewModel::class.java)
-        // Get the DetailViewModel from the DetailViewModelFactory and set it in the binding
+        // 用ViewModelFactory建立ViewModel
+        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(AreaDetailViewModel::class.java)
+
+        // 設定ViewModel到Binding
         binding.viewModel =viewModel
 
+        // 設定RecyclerView的adapter
         binding.rvPlantList.adapter = PlantListAdapter(PlantListAdapter.OnClickListener{
             viewModel.displayPlantDetails(it)
         })
 
-        // Observe the navigateToSelectedProperty LiveData and Navigate when it isn't null
-        // After navigating, call displayPropertyDetailsComplete() so that the ViewModel is ready
-        // for another navigation event.
+        // 觀察ViewModel中的變數
         viewModel.navigateToPlantDetail.observe(this, Observer {
             if ( null != it ) {
                 // Must find the NavController from the Fragment
@@ -48,14 +48,12 @@ class AreaDetailFragment : Fragment(){
             }
         })
 
+        // 更改ActionBar的文字
         (activity as AppCompatActivity).supportActionBar?.title = area.E_Name
 
+        // 加入TextView HyperLink功能
         binding.tvHyperlink.text = Html.fromHtml("<a href='" + area.E_URL + "'>在網站開啟</a>")
-
         binding.tvHyperlink.movementMethod = LinkMovementMethod.getInstance()
-
-//        var layoutManager = LinearLayoutManager(activity).isAutoMeasureEnabled
-//        binding.rvPlantList.layoutManager =layoutManager
 
         return binding.root
     }

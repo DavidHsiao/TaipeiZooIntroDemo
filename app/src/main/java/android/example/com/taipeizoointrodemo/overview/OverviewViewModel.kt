@@ -17,65 +17,57 @@ class OverviewViewModel() : ViewModel() {
 
     private val TAG = OverviewViewModel::class.java.simpleName
 
-    // The internal MutableLiveData String that stores the status of the most recent request
+    // 用於儲存Retrofit Loading狀態
     private val _status = MutableLiveData<ApiStatus>()
 
-    // The external immutable LiveData for the request status String
     val status: LiveData<ApiStatus>
         get() = _status
 
-    // Internally, we use a MutableLiveData, because we will be updating the MarsProperty with new values
+    // 用於儲存所有館別資訊
     private val _area = MutableLiveData<List<EachAreaResults>>()
 
-    // The external LiveData interface to the property is immutable, so only this class can modify
     val area: LiveData<List<EachAreaResults>>
         get() = _area
 
-    // Internally, we use a MutableLiveData to handle navigation to the selected property
+    // 用於儲存跳轉Fragment的指令
     private val _navigateToSelectedArea = MutableLiveData<EachAreaResults>()
 
-    // The external immutable LiveData for the navigation property
     val navigateToSelectedArea: LiveData<EachAreaResults>
         get() = _navigateToSelectedArea
 
 
-    // 因為使用Coroutine, 所以要建立Job
+    // 建立Coroutine使用的Job
     private var viewModelJob = Job()
+    // 建立coroutineScope
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    /**
-     * Call getTaipeiZooArea() on init so we can display status immediately.
-     */
     init {
         getTaipeiZooArea()
     }
 
-    /**
-     * Sets the value of the status LiveData to the Mars API status.
-     */
+    // 呼叫館別API
     private fun getTaipeiZooArea() {
 
         coroutineScope.launch {
             // Get the Deferred object for our Retrofit request
             var getTaipeiZooAreaDeferred = TaipeiZooAreaApi.retrofitService.getArea("resourceAquire")
 
-            // 用try catch一樣可以達到先前callback方式有的error handling
             try {
                 _status.value = ApiStatus.LOADING
                 // 等到收到request才繼續執行，await是non-blocking, 目前執行在main thread也OK
-                // Await the completion of our Retrofit request
                 var listResult = getTaipeiZooAreaDeferred.await()
                 _status.value = ApiStatus.DONE
                 Log.d(TAG, "getTaipeiZooArea Success, result count =  ${listResult.result.count}")
 
-                // 將第一筆result資料放入
+
                 if (listResult.result.count > 0) {
+                    // 將result資料放入
                     _area.value = listResult.result.results
                 }
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _area.value = ArrayList()
-                Log.d(TAG, "getTaipeiZooArea Error, MSG =  ${e.toString()}")
+                Log.d(TAG, "getTaipeiZooArea Error, MSG =  ${e.message}")
             }
         }
     }
@@ -87,17 +79,12 @@ class OverviewViewModel() : ViewModel() {
         viewModelJob.cancel()
     }
 
-    /**
-     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
-     * @param marsProperty The [MarsProperty] that was clicked on.
-     */
+    // 當點擊RecyclerView中的item時執行
     fun displayAreaDetails(eachAreaResults: EachAreaResults) {
         _navigateToSelectedArea.value = eachAreaResults
     }
 
-    /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
-     */
+    // 關閉Fragment跳轉的LiveData
     fun displayAreaDetailsComplete() {
         _navigateToSelectedArea.value = null
     }

@@ -19,45 +19,44 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : 
 
     private val TAG = AreaDetailViewModel::class.java.simpleName
 
-    // The internal MutableLiveData String that stores the status of the most recent request
+    // 用於儲存Retrofit Loading狀態
     private val _status = MutableLiveData<ApiStatus>()
 
-    // The external immutable LiveData for the request status String
     val status: LiveData<ApiStatus>
         get() = _status
 
-    // Internally, we use a MutableLiveData, because we will be updating the MarsProperty with new values
+    // 用於儲存某館所有植物的資料
     private val _plant = MutableLiveData<List<PlantResults>>()
 
-    // The external LiveData interface to the property is immutable, so only this class can modify
     val plant: LiveData<List<PlantResults>>
         get() = _plant
 
-    // Internally, we use a MutableLiveData to handle navigation to the selected property
+    // 用於儲存跳轉Fragment的指令
     private val _navigateToPlantDetail = MutableLiveData<PlantResults>()
 
-    // The external immutable LiveData for the navigation property
     val navigateToPlantDetail: LiveData<PlantResults>
         get() = _navigateToPlantDetail
 
     private val _app = app
+
+    // 用於儲存選中的館別資訊
     private val _selectedArea = MutableLiveData<EachAreaResults>()
 
     val selectedArea: LiveData<EachAreaResults>
         get() = _selectedArea
 
-    // 因為使用Coroutine, 所以要建立Job
+    // 建立Coroutine使用的Job
     private var viewModelJob = Job()
+    // 建立coroutineScope
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     init {
+        // 放入選中的館別資訊
         _selectedArea.value = eachAreaResults
         getTaipeiZooPlant()
     }
 
-    // The displayPropertyPrice formatted Transformation Map LiveData, which displays the sale
-    // or rental price.
+    // 用於儲存館別開放資訊
     private val _displayMemo = MutableLiveData<String>()
     val displayMemo: LiveData<String>
         get() {
@@ -69,25 +68,21 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : 
             return _displayMemo
         }
 
-    /**
-     * Sets the value of the status LiveData to the Mars API status.
-     */
+    // 呼叫植物API
     private fun getTaipeiZooPlant() {
 
         coroutineScope.launch {
             // Get the Deferred object for our Retrofit request
             var getTaipeiZooPlantDeferred = AreaPlantApi.retrofitService.getPlants(_selectedArea.value!!.E_Name!!)
 
-            // 用try catch一樣可以達到先前callback方式有的error handling
             try {
                 _status.value = ApiStatus.LOADING
                 // 等到收到request才繼續執行，await是non-blocking, 目前執行在main thread也OK
-                // Await the completion of our Retrofit request
                 var plantResult = getTaipeiZooPlantDeferred.await()
                 _status.value = ApiStatus.DONE
                 Log.d(TAG, "getTaipeiZooPlant Success, result count =  ${plantResult.result.count}")
 
-                // 將第一筆result資料放入
+                // 將result資料放入
                 if (plantResult.result.count > 0) {
                     _plant.value = plantResult.result.results
                 }
@@ -97,20 +92,6 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : 
                 Log.d(TAG, "getTaipeiZooPlant Error, MSG =  ${e.toString()}")
             }
         }
-
-//                    // Call the MarsApi to enqueue the Retrofit request, implementing the callbacks
-//            // 用enqueue是為了在start的時候是在background thread
-//        AreaPlantApi.retrofitService.getPlants().enqueue(object : Callback<GetPlantResult> {
-//                override fun onFailure(call: Call<GetPlantResult>, t: Throwable) {
-//                    Log.d(TAG, "Failure: " + t.message)
-//                }
-//
-//                override fun onResponse(call: Call<GetPlantResult>, response: Response<GetPlantResult>) {
-//                    Log.d(TAG, "Success: ${response.body()} Taipei Zoo Area retrieved")
-//                }
-//            })
-////        _response.value = "Set the Mars API Response here!"
-
     }
 
     // 當Fragment消失, ViewModel is destroyed, 因此Loading data的工作需要停止
@@ -120,17 +101,12 @@ class AreaDetailViewModel(eachAreaResults: EachAreaResults, app: Application) : 
         viewModelJob.cancel()
     }
 
-    /**
-     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
-     * @param marsProperty The [MarsProperty] that was clicked on.
-     */
+    /// 當點擊RecyclerView中的item時執行
     fun displayPlantDetails(plantResults: PlantResults) {
         _navigateToPlantDetail.value = plantResults
     }
 
-    /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
-     */
+    // 關閉Fragment跳轉的LiveData
     fun displayPlantDetailsComplete() {
         _navigateToPlantDetail.value = null
     }

@@ -26,27 +26,23 @@ private val retrofit = Retrofit.Builder()
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL) // server的url
     .build()
-// ScalarsConverterFactory可讓JSON訊息變成String
-//    .addConverterFactory(ScalarsConverterFactory.create())
 
-
-// Implement the MarsApiService interface with @GET getArea returning a String
+// TaipeiZooAreaApiService interface
 interface TaipeiZooAreaApiService {
     // 定義我們希望這個method使用的end point or path
-    // The end point for the JSON response is realestate
     @GET("5a0e5fbb-72f8-41c6-908e-2fb25eff9b8a")
     fun getArea(@Query("scope") type: String):
             Deferred<GetAreaResult>
 }
 
-// Create the MarsApi object using Retrofit to implement the MarsApiService
+// Create the TaipeiZooAreaApi object using Retrofit to implement the TaipeiZooAreaApiService
 object TaipeiZooAreaApi {
     val retrofitService: TaipeiZooAreaApiService by lazy {
         retrofit.create(TaipeiZooAreaApiService::class.java)
     }
 }
 
-// Implement the MarsApiService interface with @GET getArea returning a String
+// AreaPlantApiService interface
 interface AreaPlantApiService {
     // 定義我們希望這個method使用的end point or path
     // The end point for the JSON response is realestate
@@ -55,7 +51,7 @@ interface AreaPlantApiService {
             Deferred<GetPlantResult>
 }
 
-// Create the MarsApi object using Retrofit to implement the MarsApiService
+// Create the AreaPlantApi object using Retrofit to implement the AreaPlantApiService
 object AreaPlantApi {
     val retrofitService: AreaPlantApiService by lazy {
         retrofit.create(AreaPlantApiService::class.java)

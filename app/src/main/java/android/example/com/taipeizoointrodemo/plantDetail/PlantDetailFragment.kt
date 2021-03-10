@@ -18,17 +18,20 @@ class PlantDetailFragment : Fragment(){
         val binding = FragmentPlantDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        // Get the selectedProperty from the fragment arguments with DetailFragmentArgs
+        // 紀錄從AreaDetailFragment選中的植物資料
         val plant = PlantDetailFragmentArgs.fromBundle(arguments!!).selectedPlant
 
-        // Create the DetailViewModelFactory using the marsProperty and application
+        // 建立ViewModelFactory
         val viewModelFactory = PlantDetailViewModelFactory(plant, application)
 
+        // 用ViewModelFactory建立ViewModel
         val viewModel = ViewModelProviders.of(
             this, viewModelFactory).get(PlantDetailViewModel::class.java)
-        // Get the DetailViewModel from the DetailViewModelFactory and set it in the binding
+
+        // 設定ViewModel到Binding
         binding.viewModel =viewModel
 
+        // 更改ActionBar的文字
         (activity as AppCompatActivity).supportActionBar?.title = plant.f_Name_Ch
 
         return binding.root
