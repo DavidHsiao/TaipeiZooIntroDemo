@@ -1,20 +1,26 @@
 package android.example.com.taipeizoointrodemo.areaDetail
 
+import android.content.res.Resources
 import android.example.com.taipeizoointrodemo.databinding.PlantItemBinding
 import android.example.com.taipeizoointrodemo.networkApi.PlantResults
+import android.example.com.taipeizoointrodemo.overview.OverviewViewModel
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 class PlantListAdapter(val onClickListener: OnClickListener) : ListAdapter<PlantResults, PlantListAdapter.TaipeiZooPlantViewHolder>(DiffCallback){
 
+    private val TAG = PlantListAdapter::class.java.simpleName
+
     class TaipeiZooPlantViewHolder(private var binding: PlantItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-
-        binding.
         fun bind(zooPlant: PlantResults) {
+            // 重新定義各LayoutParams
+            binding.llPlantItem.layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             binding.plant = zooPlant
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements update immediately
@@ -24,11 +30,13 @@ class PlantListAdapter(val onClickListener: OnClickListener) : ListAdapter<Plant
 
     // 建立全新的viewholder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaipeiZooPlantViewHolder {
-        return TaipeiZooPlantViewHolder(PlantItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        Log.d(TAG, "onCreateViewHolder(): $viewType")
+        return TaipeiZooPlantViewHolder(PlantItemBinding.inflate(LayoutInflater.from(parent.context), null, true))
     }
 
     // Replaces the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: TaipeiZooPlantViewHolder, position: Int) {
+        Log.d(TAG, "onBindViewHolder(): Position $position")
         val zooPlant = getItem(position)
         // Call the onClick Function from the onClickListener in a lambda from setOnClickListener
         holder.itemView.setOnClickListener {

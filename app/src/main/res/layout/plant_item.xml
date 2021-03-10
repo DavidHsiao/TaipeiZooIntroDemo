@@ -8,9 +8,11 @@
     </data>
 
     <LinearLayout
+            android:id="@+id/ll_plant_item"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/corner_shape"
     >
         <ImageView
                 android:layout_width="120dp"
@@ -30,8 +32,7 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
-        >
+                android:layout_weight="9">
             <TextView
                     android:id="@+id/tv_plant_name"
                     android:text="@{plant.f_Name_Ch}"
