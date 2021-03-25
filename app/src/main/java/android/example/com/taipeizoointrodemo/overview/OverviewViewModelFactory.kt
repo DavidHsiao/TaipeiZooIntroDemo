@@ -1,7 +1,5 @@
 package android.example.com.taipeizoointrodemo.overview
 
-import android.app.Activity
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 

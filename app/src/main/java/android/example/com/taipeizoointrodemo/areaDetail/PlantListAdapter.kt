@@ -1,9 +1,7 @@
 package android.example.com.taipeizoointrodemo.areaDetail
 
-import android.content.res.Resources
 import android.example.com.taipeizoointrodemo.databinding.PlantItemBinding
 import android.example.com.taipeizoointrodemo.networkApi.PlantResults
-import android.example.com.taipeizoointrodemo.overview.OverviewViewModel
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
